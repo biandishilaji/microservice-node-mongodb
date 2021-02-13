@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/list', (req, res) =>{
-  return res('oi')
+  return res.send('oi')
 })
 
 module.exports = router;

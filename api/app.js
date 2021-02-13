@@ -18,7 +18,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-mongoose.connect('mongodb://localhost:27017/account',
+mongoose.connect('mongodb+srv://gabriel:5ZZJ4iBIkcmSKH3e@cluster0.42ig9.mongodb.net/account?retryWrites=true&w=majority',
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
