@@ -7,7 +7,7 @@ function verifyJWT(req, res, next){
 
     jwt.verify(token, process.env.JWT_SECRET, function(err, decoded) {
         if (err) return res.status(500).json({ auth: false, message: 'Falha ao autorizar o token.' });
-        req.user = decoded.payload.user;
+        req.user = decoded.user;
         next();
     });
 }

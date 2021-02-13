@@ -1,21 +1,32 @@
-const User = require('../models/User');
+const baseController = require('../../../Http/Controllers/baseController')
+const usersRepository = require('../repositories/Infraestruture/usersRepository')
+var _usersRepository = null
 
-const baseController = require('../../../Http/Controllers/baseController.js')
+class userController extends baseController{
 
+   constructor() {
+       super()
+       _usersRepository = new usersRepository()
+   }
 
-module.exports = {
-    async fetch(req, res) {
+    async fetch(req, res)  {
+
         try {
 
-            const id = req.user.id
+            const _id = req.user._id
 
-            const user = await User.findOne({id})
+            const user = await _usersRepository.find({_id})
 
-            return baseController.responseSucess(res, '', {user})
-            // return res.send(req)
+             return response.success(res, '', {user})
         } catch (e) {
-            return baseController.responseError(res, e)
+            return response.error(res, '')
         }
-    },
+    }
 
-};
+}
+
+module.exports = userController
+
+
+
+

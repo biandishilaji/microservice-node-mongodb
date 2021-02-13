@@ -1,7 +1,6 @@
-const express = require('express');
+const express = require('express'), mongo = require("./mongoose")
 const path = require('path');
-const cookieParser = require('cookie-parser');
-const mongoose = require('mongoose')
+const response = require('./app/Http/response')
 const accountRouter = require('./app/modules/Account/routes/index');
 require("dotenv").config();
 
@@ -11,12 +10,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(accountRouter);
+global.response = response
 
-mongoose.connect('mongodb+srv://gabriel:5ZZJ4iBIkcmSKH3e@cluster0.42ig9.mongodb.net/account?retryWrites=true&w=majority',
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    })
+mongo.connect(function(error){
+    if (error) throw error;
+});
+
+app.use(accountRouter);
 
 module.exports = app;
